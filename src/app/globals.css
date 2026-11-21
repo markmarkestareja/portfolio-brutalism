@@ -1,49 +1,190 @@
+/* Deep Teal theme — from the "Deep Teal — Desktop 1440" artboard */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --accent: #3cc8ee;
+  --accent-bright: #7fe3ff;
+  --bg: #050e14;
+  --bg-deep: #030a0f;
+  --ink: #e6f3f7;
+  --body: #b9d3dc;
+  --muted: #8eb1be;
+  --chip-text: #cfe6ee;
+  --line: #15303b;
+  --field-line: #2a4b57;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  --glass-bg: rgba(127, 227, 255, 0.06);
+  --glass-bg-hover: rgba(127, 227, 255, 0.14);
+  --glass-border: rgba(127, 227, 255, 0.3);
+  --glass-dark: rgba(5, 14, 20, 0.72);
+  --glow: rgba(60, 200, 238, 0.45);
 
-html {
-  height: 100%;
-}
+  /* Dotted "halftone" fill used for image placeholders and panels */
+  --dots-lg: radial-gradient(circle, #02080c 3.2px, transparent 3.8px);
+  --dots-sm: radial-gradient(circle, #02080c 2.4px, transparent 2.9px);
+  --teal-wash: linear-gradient(150deg, #10475a 0%, #061820 70%);
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --gutter: 24px;
 }
 
 * {
   box-sizing: border-box;
-  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p, ul, ol, dl, dd, figure, pre {
   margin: 0;
 }
 
+ul, ol {
+  padding: 0;
+  list-style: none;
+}
+
 a {
-  color: inherit;
+  color: var(--ink);
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
+a:hover {
+  color: var(--accent-bright);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 2px;
+}
+
+/* Keep anchored sections clear of the sticky header */
+section[id] {
+  scroll-margin-top: 56px;
+}
+
+/* 1440px max frame with hairline sides */
+.frame {
+  max-width: 1440px;
+  margin: 0 auto;
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  min-height: 100vh;
+}
+
+/* Shared type styles */
+.mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  text-transform: uppercase;
+}
+
+.display {
+  font-family: var(--font-display), sans-serif;
+  font-stretch: 125%;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.glow {
+  color: var(--accent);
+  text-shadow: 0 0 40px var(--glow);
+}
+
+.navLink {
+  color: var(--body);
+}
+
+.navLink:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Frosted "glass" button used across the theme */
+.glassBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 14px 22px;
+  border: 1px solid rgba(127, 227, 255, 0.35);
+  border-radius: 10px;
+  background: rgba(127, 227, 255, 0.07);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 8px 30px rgba(60, 200, 238, 0.12);
+  color: var(--ink);
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.glassBtn:hover {
+  background: var(--glass-bg-hover);
+  color: #fff;
+}
+
+/* Small rounded chip with a teal outline */
+.chip {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  background: var(--glass-bg);
+  color: var(--accent);
+}
+
+/* Label on image placeholders */
+.imgLabel {
+  padding: 6px 10px;
+  border: 1px solid rgba(127, 227, 255, 0.25);
+  border-radius: 6px;
+  background: rgba(5, 14, 20, 0.82);
+  color: var(--body);
+  font-size: 12px;
+}
+
+@media (max-width: 639px) {
+  :root {
+    --gutter: 16px;
+  }
+
+  body {
+    font-size: 15px;
+  }
+
+  .frame {
+    border: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
   html {
-    color-scheme: dark;
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
   }
 }
